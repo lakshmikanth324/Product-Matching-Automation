@@ -1,0 +1,16 @@
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: product-match-cron
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: matcher
+            image: product-matcher:latest
+            command: ["python3", "src/matcher.py"]
+          restartPolicy: OnFailure

@@ -1,0 +1,20 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-matcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: matcher
+  template:
+    metadata:
+      labels:
+        app: matcher
+    spec:
+      containers:
+      - name: matcher
+        image: product-matcher:latest
+        imagePullPolicy: Never
+        command: ["python3", "src/matcher.py"]
